@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Cafetería - UT Altamira</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="styles.css">
+  <script src="auth.js" defer></script>
+  <!-- Nuestro script para simular el escaneo y editar alimentos -->
+  <script src="qr_scanner.js" defer></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid header-container">
+      <div class="navbar-header text-center">
+        <div class="header-box center-block">
+          <img src="images/logo-utalt.png" alt="UT Altamira" class="header-logo">
+          <span class="header-text">Cafetería Dragones</span>
+        </div>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+        <li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR DE CONTENIDO -->
+  <div class="content-wrapper">
+    <div class="container" style="margin-top:70px;">
+      <h2 class="text-center">Gestión de Cafetería</h2>
+      <div class="row">
+        <!-- Panel para editar información general (horario, menú general) -->
+        <div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Editar Información General</strong></div>
+            <div class="panel-body">
+              <form id="info-form">
+                <div class="form-group">
+                  <label for="caf-horario">Horario</label>
+                  <input type="text" id="caf-horario" class="form-control" value="7:00 AM - 5:00 PM">
+                </div>
+                <div class="form-group">
+                  <label for="caf-menu">Menú del Día (Texto general)</label>
+                  <textarea id="caf-menu" class="form-control" rows="4">Sandwich - $25
+Baguette - $40
+Jugo Natural - $20</textarea>
+                </div>
+                <button type="button" class="btn btn-success">Guardar Cambios</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Panel para editar alimentos individuales -->
+        <div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Editar Alimentos</strong></div>
+            <div class="panel-body">
+              <!-- Contenedor scrollable para la tabla -->
+              <div class="scrollable-table">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Precio</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="food-table-body">
+                    <!-- Aquí se muestran 24 filas (simuladas) -->
+                    <tr data-index="0">
+                      <td>Sandwich</td>
+                      <td>$25</td>
+                      <td><button class="btn btn-primary btn-edit-food">Editar</button></td>
+                    </tr>
+                    <tr data-index="1">
+                      <td>Baguette</td>
+                      <td>$40</td>
+                      <td><button class="btn btn-primary btn-edit-food">Editar</button></td>
+                    </tr>
+                    <tr data-index="2">
+                      <td>Jugo Natural</td>
+                      <td>$20</td>
+                      <td><button class="btn btn-primary btn-edit-food">Editar</button></td>
+                    </tr>
+                    <tr data-index="3">
+                      <td>Ensalada</td>
+                      <td>$30</td>
+                      <td><button class="btn btn-primary btn-edit-food">Editar</button></td>
+                    </tr>
+                    <tr data-index="4">
+                      <td>Pizza</td>
+                      <td>$50</td>
+                      <td><button class="btn btn-primary btn-edit-food">Editar</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> <!-- .scrollable-table -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Panel de escaneo QR (para reclamar beca) -->
+      <div class="row" style="margin-top:30px;">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Escanear QR de Beca</strong></div>
+            <div class="panel-body text-center">
+              <button id="simulate-scan" class="btn btn-info">Abrir Cámara y Escanear</button>
+              <!-- Video para la cámara -->
+              <video id="video" width="320" height="240" autoplay style="display:none; margin:10px auto; border: 2px solid #333;"></video>
+              <!-- Resultado del escaneo -->
+              <div id="qr-result" class="well" style="display:none; margin-top:20px;">
+                <!-- Se mostrará la credencial del alumno -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Modal para editar alimento -->
+  <div id="editFoodModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar Alimento</h4>
+        </div>
+        <div class="modal-body">
+          <form id="edit-food-form">
+            <div class="form-group">
+              <label for="food-name">Nombre</label>
+              <input type="text" id="food-name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="food-price">Precio</label>
+              <input type="text" id="food-price" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="food-description">Descripción</label>
+              <textarea id="food-description" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="food-ingredients">Ingredientes</label>
+              <input type="text" id="food-ingredients" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="food-image">URL de la imagen</label>
+              <input type="text" id="food-image" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p>&copy; 2025 Universidad Tecnológica de Altamira — Cafetería Dragones</p>
+    </div>
+  </footer>
+
+  <!-- Scripts de Bootstrap y jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script>
+    /********* Gestión de alimentos **********/
+    // Datos simulados para 24 alimentos
+    let foodItems = [
+      { name: "Sandwich", price: "$25", description: "Delicioso sandwich con queso y jamón.", ingredients: "Pan, queso, jamón, lechuga", image: "images/food1.jpg" },
+      { name: "Baguette", price: "$40", description: "Baguette crujiente y sabrosa.", ingredients: "Pan, mantequilla, mermelada", image: "images/food2.jpg" },
+      { name: "Jugo Natural", price: "$20", description: "Refrescante jugo natural.", ingredients: "Fruta fresca, hielo", image: "images/food3.jpg" },
+      { name: "Ensalada", price: "$30", description: "Ensalada fresca y saludable.", ingredients: "Vegetales mixtos, aderezo", image: "images/food4.jpg" },
+      { name: "Pizza", price: "$50", description: "Pizza individual con ingredientes frescos.", ingredients: "Masa, salsa, queso, vegetales", image: "images/food5.jpg" },
+    ];
+
+    // Renderiza los alimentos en la tabla
+    function renderFoodTable() {
+      let tbody = $("#food-table-body");
+      tbody.empty();
+      foodItems.forEach((item, index) => {
+        tbody.append(`
+          <tr data-index="${index}">
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            <td><button class="btn btn-primary btn-edit-food">Editar</button></td>
+          </tr>
+        `);
+      });
+    }
+    renderFoodTable();
+
+    // Manejo de edición de alimentos
+    $(document).on("click", ".btn-edit-food", function() {
+      const row = $(this).closest("tr");
+      const index = row.data("index");
+      const food = foodItems[index];
+      $("#food-name").val(food.name);
+      $("#food-price").val(food.price);
+      $("#food-description").val(food.description);
+      $("#food-ingredients").val(food.ingredients);
+      $("#food-image").val(food.image);
+      $("#editFoodModal").data("index", index).modal("show");
+    });
+
+    $("#edit-food-form").on("submit", function(e) {
+      e.preventDefault();
+      const index = $("#editFoodModal").data("index");
+      foodItems[index] = {
+        name: $("#food-name").val(),
+        price: $("#food-price").val(),
+        description: $("#food-description").val(),
+        ingredients: $("#food-ingredients").val(),
+        image: $("#food-image").val()
+      };
+      renderFoodTable();
+      $("#editFoodModal").modal("hide");
+    });
+
+    /********* Simulación de escaneo y cámara **********/
+    const simulateButton = document.getElementById("simulate-scan");
+    const video = document.getElementById("video");
+    const qrResult = document.getElementById("qr-result");
+
+    simulateButton.addEventListener("click", function() {
+      // Intenta abrir la cámara
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function(stream) {
+            video.style.display = "block";
+            video.srcObject = stream;
+            // Simula escaneo durante 5 segundos
+            setTimeout(function() {
+              stream.getTracks().forEach(track => track.stop());
+              video.style.display = "none";
+              qrResult.style.display = "block";
+              document.getElementById("btn-canjear").addEventListener("click", function() {
+                alert("Beca canjeada exitosamente a las " + new Date().toLocaleString());
+              });
+              document.getElementById("btn-no-canjear").addEventListener("click", function() {
+                alert("Operación cancelada. La beca no fue canjeada.");
+              });
+            }, 5000);
+          })
+          .catch(function(err) {
+            alert("No se pudo acceder a la cámara: " + err);
+          });
+      } else {
+        alert("getUserMedia no es soportado en este navegador.");
+      }
+    });
+  </script>
+</body>
+</html>

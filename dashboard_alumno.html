@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Alumno - Cafetería UT Altamira</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Incluir la librería QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="qr_generator.js" defer></script>
+  <script src="jquery.min.js"></script>
+  <script src="auth.js" defer></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid header-container">
+      <div class="navbar-header text-center">
+        <div class="header-box center-block">
+          <img src="images/logo-utalt.png" alt="UT Altamira" class="header-logo">
+          <span class="header-text">Cafetería Dragones</span>
+        </div>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+        <li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR DE CONTENIDO -->
+  <div class="content-wrapper">
+    <div class="container" style="margin-top:70px;">
+      <h2 class="text-center">Tu Beca Alimenticia</h2>
+      <p class="text-center lead" style="color:#333;">
+        <strong>Importante:</strong> Este código QR es <em>personal</em> y solo se puede utilizar <strong>una vez al día</strong> para canjear tu beca alimenticia.
+      </p>
+      <div id="qr-code" class="qr-container center-block"></div>
+      <p class="help-block text-center">
+        Recuerda: Si no canjeas tu beca en 5 días, se enviará una notificación a tu correo. A los 7 días sin canjear, se cancelará la beca.
+      </p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>&copy; 2025 Universidad Tecnológica de Altamira — Alumno</p>
+    </div>
+  </footer>
+
+  <!-- Scripts de Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

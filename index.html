@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cafetería UT Altamira</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 3 CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="styles.css">
+  <script src="jquery.min.js"></script>
+  <script src="auth.js" defer></script>
+</head>
+<body>
+  <div class="content-wrapper">
+    <!-- HEADER -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid header-container">
+        <div class="navbar-header text-center">
+          <div class="header-box center-block">
+            <!-- Logo UT y texto -->
+            <img src="images/logo-utalt.png" alt="UT Altamira" class="header-logo">
+            <span class="header-text">Cafetería Dragones</span>
+          </div>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+        </ul>
+      </div>
+    </nav>
+  
+    <!-- HERO -->
+    <header class="hero" style="background-image: url('images/background.jpg');">
+      <div class="hero-box">
+        <img src="images/cafeteria.jpg" alt="Logo Cafetería" class="hero-logo">
+        <div class="hero-text">
+          <h1>Bienvenidos a la Cafetería UT Altamira</h1>
+        </div>
+      </div>
+    </header>
+  
+    <!-- COMIDA DEL DÍA -->
+    <section class="daily-special container">
+      <div class="special-box text-center">
+        <h2>Comida del Día - Miércoles</h2>
+        <img src="images/daily_special.jpg" alt="Platillo del Día" class="img-responsive center-block special-img">
+        <p class="special-description">
+          ¡No te pierdas nuestro platillo especial de hoy! Disfruta de unas exquisitas <strong>Enchiladas Verdes</strong> preparadas con la receta tradicional de la UT Altamira. ¡Un deleite para tu paladar!
+        </p>
+      </div>
+    </section>
+  
+    <!-- HORARIO -->
+    <section class="container info-section">
+      <h2 class="text-center">Horario</h2>
+      <table class="table table-bordered table-striped horario-table">
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Horario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lunes - Viernes</td>
+            <td>7:00 AM - 5:00 PM</td>
+          </tr>
+          <tr>
+            <td>Sábado</td>
+            <td>8:00 AM - 2:00 PM</td>
+          </tr>
+          <tr>
+            <td>Domingo</td>
+            <td>Cerrado</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <!-- CARRUSEL DE MENÚ -->
+    <section class="container">
+      <h2 class="text-center">Nuestro Menú</h2>
+      <div id="foodCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+        <!-- Indicadores -->
+        <ol class="carousel-indicators">
+          <li data-target="#foodCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#foodCarousel" data-slide-to="1"></li>
+          <li data-target="#foodCarousel" data-slide-to="2"></li>
+          <li data-target="#foodCarousel" data-slide-to="3"></li>
+        </ol>
+  
+        <!-- Slides del carrusel: 4 slides -->
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="item active">
+            <div class="row">
+              <!-- Items 1 a 6 -->
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food1.jpg" alt="Sandwich" class="img-responsive food-img">
+                  <h4>Sandwich</h4>
+                  <p><strong>$25</strong></p>
+                  <p>Delicioso sandwich con queso y jamón.</p>
+                  <p><em>Incluye: Pan, queso, jamón, lechuga.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food2.jpg" alt="Baguette" class="img-responsive food-img">
+                  <h4>Baguette</h4>
+                  <p><strong>$40</strong></p>
+                  <p>Baguette crujiente y sabrosa.</p>
+                  <p><em>Incluye: Pan, mantequilla, mermelada.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food3.jpg" alt="Jugo Natural" class="img-responsive food-img">
+                  <h4>Jugo Natural</h4>
+                  <p><strong>$20</strong></p>
+                  <p>Refrescante jugo natural.</p>
+                  <p><em>Incluye: Fruta fresca, hielo.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food4.jpg" alt="Ensalada" class="img-responsive food-img">
+                  <h4>Ensalada</h4>
+                  <p><strong>$30</strong></p>
+                  <p>Ensalada fresca y saludable.</p>
+                  <p><em>Incluye: Vegetales mixtos, aderezo.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food5.jpg" alt="Pizza" class="img-responsive food-img">
+                  <h4>Pizza</h4>
+                  <p><strong>$50</strong></p>
+                  <p>Pizza individual con ingredientes frescos.</p>
+                  <p><em>Incluye: Masa, salsa, queso, vegetales.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food6.jpg" alt="Hamburguesa" class="img-responsive food-img">
+                  <h4>Hamburguesa</h4>
+                  <p><strong>$35</strong></p>
+                  <p>Hamburguesa clásica con papas.</p>
+                  <p><em>Incluye: Carne, pan, vegetales, papas.</em></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="item">
+            <div class="row">
+              <!-- Items 7 a 12 -->
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food7.jpg" alt="Hot Dog" class="img-responsive food-img">
+                  <h4>Hot Dog</h4>
+                  <p><strong>$20</strong></p>
+                  <p>Con todos los ingredientes.</p>
+                  <p><em>Incluye: Salchicha, pan, aderezos.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food8.jpg" alt="Wrap" class="img-responsive food-img">
+                  <h4>Wrap</h4>
+                  <p><strong>$28</strong></p>
+                  <p>Saludable con pollo y vegetales.</p>
+                  <p><em>Incluye: Tortilla, pollo, vegetales.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food9.jpg" alt="Smoothie" class="img-responsive food-img">
+                  <h4>Smoothie</h4>
+                  <p><strong>$18</strong></p>
+                  <p>De frutas mixtas.</p>
+                  <p><em>Incluye: Fruta, yogurt, miel.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food10.jpg" alt="Café Especial" class="img-responsive food-img">
+                  <h4>Café Especial</h4>
+                  <p><strong>$15</strong></p>
+                  <p>Café de especialidad.</p>
+                  <p><em>Incluye: Café, leche, espuma.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food11.jpg" alt="Tostada" class="img-responsive food-img">
+                  <h4>Tostada</h4>
+                  <p><strong>$22</strong></p>
+                  <p>Crujiente con frijoles.</p>
+                  <p><em>Incluye: Tostada, frijoles, lechuga.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food12.jpg" alt="Sándwich Vegano" class="img-responsive food-img">
+                  <h4>Sándwich Vegano</h4>
+                  <p><strong>$30</strong></p>
+                  <p>Con vegetales y hummus.</p>
+                  <p><em>Incluye: Pan integral, hummus, vegetales.</em></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="item">
+            <div class="row">
+              <!-- Items 13 a 18 -->
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food13.jpg" alt="Batido Proteico" class="img-responsive food-img">
+                  <h4>Batido Proteico</h4>
+                  <p><strong>$25</strong></p>
+                  <p>Con proteína de soya.</p>
+                  <p><em>Incluye: Leche, proteína, fruta.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food14.jpg" alt="Wrap de Pollo" class="img-responsive food-img">
+                  <h4>Wrap de Pollo</h4>
+                  <p><strong>$32</strong></p>
+                  <p>Con pollo a la plancha.</p>
+                  <p><em>Incluye: Tortilla, pollo, vegetales.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food15.jpg" alt="Panini" class="img-responsive food-img">
+                  <h4>Panini</h4>
+                  <p><strong>$27</strong></p>
+                  <p>De jamón y queso.</p>
+                  <p><em>Incluye: Panini, jamón, queso, vegetales.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food16.jpg" alt="Empanada" class="img-responsive food-img">
+                  <h4>Empanada</h4>
+                  <p><strong>$18</strong></p>
+                  <p>Rellena de carne.</p>
+                  <p><em>Incluye: Masa, carne, salsa.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food17.jpg" alt="Quesadilla" class="img-responsive food-img">
+                  <h4>Quesadilla</h4>
+                  <p><strong>$20</strong></p>
+                  <p>Con queso derretido.</p>
+                  <p><em>Incluye: Tortilla, queso, salsa.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food18.jpg" alt="Sopa del Día" class="img-responsive food-img">
+                  <h4>Sopa del Día</h4>
+                  <p><strong>$15</strong></p>
+                  <p>Sopa casera.</p>
+                  <p><em>Incluye: Sopa, pan tostado.</em></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="item">
+            <div class="row">
+              <!-- Items 19 a 24 -->
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food19.jpg" alt="Wrap Vegetariano" class="img-responsive food-img">
+                  <h4>Wrap Vegetariano</h4>
+                  <p><strong>$29</strong></p>
+                  <p>Fresco y saludable.</p>
+                  <p><em>Incluye: Tortilla, vegetales, aderezo.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food20.jpg" alt="Postre" class="img-responsive food-img">
+                  <h4>Postre</h4>
+                  <p><strong>$12</strong></p>
+                  <p>Delicioso postre.</p>
+                  <p><em>Incluye: Dulce, fruta, crema.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food21.jpg" alt="Enchiladas" class="img-responsive food-img">
+                  <h4>Enchiladas</h4>
+                  <p><strong>$33</strong></p>
+                  <p>Tradicionales.</p>
+                  <p><em>Incluye: Tortillas, salsa, queso.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food22.jpg" alt="Tacos" class="img-responsive food-img">
+                  <h4>Tacos</h4>
+                  <p><strong>$28</strong></p>
+                  <p>Variados.</p>
+                  <p><em>Incluye: Tortilla, carne, salsas.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food23.jpg" alt="Bowl Saludable" class="img-responsive food-img">
+                  <h4>Bowl Saludable</h4>
+                  <p><strong>$34</strong></p>
+                  <p>Con granola y fruta.</p>
+                  <p><em>Incluye: Avena, fruta, nueces.</em></p>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-2">
+                <div class="food-card">
+                  <img src="images/food24.jpg" alt="Smoothie Bowl" class="img-responsive food-img">
+                  <h4>Smoothie Bowl</h4>
+                  <p><strong>$38</strong></p>
+                  <p>Nutritivo.</p>
+                  <p><em>Incluye: Fruta, granola, miel.</em></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Controles del carrusel -->
+        <a class="left carousel-control" href="#foodCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#foodCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- BOTÓN DE AYUDA FLOTANTE CON TEXTO -->
+  <div class="help-container">
+    <a href="javascript:void(0)" class="help-button" onclick="alert('¿Necesitas ayuda?')">
+      <img src="images/help-icon.png" alt="Ayuda" class="help-icon">
+    </a>
+    <div class="help-text">Desarrollado por el Club de Inteligencia Artificial</div>
+  </div>
+  
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p>&copy; 2025 Universidad Tecnológica de Altamira — Cafetería Dragones</p>
+    </div>
+  </footer>
+  
+  <!-- Scripts de Bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</div>
+</body>
+</html>

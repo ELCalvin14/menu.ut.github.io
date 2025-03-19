@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión - Cafetería UT Altamira</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="jquery.min.js"></script>
+  <script src="auth.js" defer></script>
+</head>
+<body class="login-body">
+  <!-- HEADER -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid header-container">
+      <div class="navbar-header text-center">
+        <div class="header-box center-block">
+          <img src="images/logo-utalt.png" alt="UT Altamira" class="header-logo">
+          <span class="header-text">Cafetería Dragones</span>
+        </div>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR DE CONTENIDO -->
+  <div class="content-wrapper">
+    <div class="container">
+      <div class="login-container">
+        <h2 class="text-center">Iniciar Sesión</h2>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Usuario (Matrícula para alumno)</label>
+            <input type="text" id="username" class="form-control" placeholder="Ej. 123456" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••" required>
+          </div>
+          <div class="form-group">
+            <label for="role">Selecciona tu rol:</label>
+            <select id="role" class="form-control">
+              <option value="cafeteria">Cafetería</option>
+              <option value="admin">Administrador</option>
+              <option value="alumno">Alumno</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>&copy; 2025 UT Altamira</p>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

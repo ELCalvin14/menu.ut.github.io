@@ -1,0 +1,253 @@
+/* Ajuste general */
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* HEADER */
+  .header-container {
+    background-color: rgb(26, 177, 146);
+    padding-top: 10px;
+  }
+  .header-box {
+    display: inline-block;
+    background-color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .header-box.center-block {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .header-logo {
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  .header-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Estilos para el enlace "Iniciar Sesión" */
+  .navbar-nav > li > a {
+    color: #000 !important; /* Texto en blanco sobre fondo negro */
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .navbar-nav > li > a:hover {
+    color: #ccc !important;
+  }
+  
+  
+  /* HERO */
+  .hero {
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-box {
+    background-color: rgba(255,255,255,0.95);
+    border: 2px solid #ccc;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .hero-logo {
+    width: 80px;
+    margin-right: 20px;
+  }
+  .hero-text h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: #333;
+  }
+  
+  /* HORARIO (tabla) */
+  .horario-table {
+    margin-top: 30px;
+    background-color: #fff;
+    border: 2px solid rgb(26, 177, 146);
+  }
+  .horario-table th,
+  .horario-table td {
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  /* BOTÓN DE AYUDA */
+  .help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(26, 177, 146);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+  .help-icon {
+    width: 32px;
+    vertical-align: middle;
+  }
+  
+  /* FOOD CARDS en el carrusel */
+  .food-card {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    height: 350px;
+    overflow: hidden;
+  }
+  .food-card h4 {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .food-card p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  .food-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  
+  /* Carrusel: ajusta márgenes */
+  .carousel-inner .item {
+    padding: 20px 0;
+  }
+  
+  /* FOOTER */
+  .footer {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  .footer p {
+    margin: 0;
+    text-align: center;
+  }
+  
+  .qr-container {
+    margin: 20px auto;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #333;
+    padding: 10px;
+    background-color: #fff;
+  }  
+  
+  .content-wrapper {
+    flex: 1 0 auto;  /* Permite que el contenedor se expanda según el contenido */
+  }
+
+  /* Sección de Comida del Día */
+  .daily-special {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.95);
+    border: 2px solid rgb(26, 177, 146);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .special-box h2 {
+    font-size: 2.2em;
+    color: rgb(26, 177, 146);
+    margin-bottom: 20px;
+  }
+
+  .special-img {
+    max-width: 400px;
+    margin: 0 auto 20px;
+  }
+
+  .special-description {
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+  }
+
+  /* Contenedor para la tabla de edición de alimentos */
+  .scrollable-table {
+    max-height: 300px; /* Ajusta según lo que necesites */
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+
+  /* Asegúrate de que el contenido de la tabla se muestre correctamente */
+  #food-table-body tr td {
+    vertical-align: middle;
+    padding: 8px;
+  }
+
+  /* Contenedor para el botón de ayuda y el texto */
+  .help-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .help-button {
+    background-color: rgb(26, 177, 146);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 40px; /* Espacio entre el botón y el texto */
+  }
+  
+  .help-icon {
+    width: 32px;
+  }
+  
+  .help-text {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  
+
+  
