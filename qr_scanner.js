@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
       qrResult.innerHTML = "<p class='text-info'>⏳ Buscando alumno...</p>";
       qrResult.style.display = "block";
 
+      const supabase = window.supabase;
+
       const { data, error } = await supabase
         .from("alumnos")
         .select("*")
