@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       qrResult.innerHTML = `
         <h3>Credencial del Alumno</h3>
-        <img src="${data.foto_url}" alt="Foto del Alumno" class="img-responsive center-block" style="max-width:900px;">
+        <img src="${data.foto_url}" alt="Foto del Alumno" class="img-responsive center-block" style="width: 150px; height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
         <p><strong>Nombre:</strong> ${data.nombre}</p>
         <p><strong>Matrícula:</strong> ${data.matricula}</p>
         <p><strong>Grado:</strong> ${data.grado}</p>
