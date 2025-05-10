@@ -224,39 +224,6 @@ Jugo Natural - $20</textarea>
       renderFoodTable();
       $("#editFoodModal").modal("hide");
     });
-
-    /********* Simulación de escaneo y cámara **********/
-    const simulateButton = document.getElementById("simulate-scan");
-    const video = document.getElementById("video");
-    const qrResult = document.getElementById("qr-result");
-
-    simulateButton.addEventListener("click", function() {
-      // Intenta abrir la cámara
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-          .then(function(stream) {
-            video.style.display = "block";
-            video.srcObject = stream;
-            // Simula escaneo durante 5 segundos
-            setTimeout(function() {
-              stream.getTracks().forEach(track => track.stop());
-              video.style.display = "none";
-              qrResult.style.display = "block";
-              document.getElementById("btn-canjear").addEventListener("click", function() {
-                alert("Beca canjeada exitosamente a las " + new Date().toLocaleString());
-              });
-              document.getElementById("btn-no-canjear").addEventListener("click", function() {
-                alert("Operación cancelada. La beca no fue canjeada.");
-              });
-            }, 5000);
-          })
-          .catch(function(err) {
-            alert("No se pudo acceder a la cámara: " + err);
-          });
-      } else {
-        alert("getUserMedia no es soportado en este navegador.");
-      }
-    });
   </script>
 </body>
 </html>
