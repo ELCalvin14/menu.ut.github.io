@@ -1,39 +1,58 @@
-function onScanSuccess(decodedText, decodedResult) {
-  console.log("QR Detectado:", decodedText);
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("📦 qr_scanner.js cargado correctamente");
 
-  const matricula = decodedText.split(":")[1]?.trim();
-  if (!matricula) {
-    qrResult.innerHTML = "<p class='text-danger'>QR inválido.</p>";
-    qrResult.style.display = "block";
+  const btnAbrirQR = document.getElementById("btn-abrir-qr");
+  const qrResult = document.getElementById("qr-result");
+  const readerContainer = document.getElementById("reader");
+
+  let html5QrCode = null;
+
+  if (!btnAbrirQR || !readerContainer || !qrResult) {
+    console.error("No se encontró uno de los elementos requeridos.");
     return;
   }
 
-  // Muestra mensaje mientras busca
-  qrResult.innerHTML = "<p class='text-info'>⏳ Buscando alumno...</p>";
-  qrResult.style.display = "block";
+  btnAbrirQR.addEventListener("click", async () => {
+    btnAbrirQR.style.display = "none";
+    readerContainer.style.display = "block";
 
-  // Buscar en Supabase
-  supabase
-    .from("alumnos")
-    .select("*")
-    .eq("matricula", matricula)
-    .single()
-    .then(async ({ data, error }) => {
+    html5QrCode = new Html5Qrcode("reader");
+
+    const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+    const onScanSuccess = async (decodedText) => {
+      console.log("QR Detectado:", decodedText);
+
+      const matricula = decodedText.split(":")[1]?.trim();
+      if (!matricula) {
+        qrResult.innerHTML = "<p class='text-danger'>QR inválido.</p>";
+        qrResult.style.display = "block";
+        return;
+      }
+
+      qrResult.innerHTML = "<p class='text-info'>⏳ Buscando alumno...</p>";
+      qrResult.style.display = "block";
+
+      const { data, error } = await supabase
+        .from("alumnos")
+        .select("*")
+        .eq("matricula", matricula)
+        .single();
+
       if (error || !data) {
         qrResult.innerHTML = `<p class="text-danger">Alumno con matrícula ${matricula} no encontrado.</p>`;
         return;
       }
 
-      // Detener cámara *después* de haber resuelto todo lo anterior
       try {
         await html5QrCode.stop();
-        readerContainer.innerHTML = "";
+        html5QrCode.clear();
+        readerContainer.style.display = "none";
       } catch (stopError) {
-        console.warn("Error al detener la cámara o procesar QR:", stopError);
+        console.warn("Error al detener la cámara:", stopError);
         alert("Ocurrió un error al procesar el QR.");
       }
 
-      // Mostrar datos reales del alumno
       qrResult.innerHTML = `
         <h3>Credencial del Alumno</h3>
         <img src="${data.foto_url}" alt="Foto del Alumno" class="img-responsive center-block" style="max-width:300px;">
@@ -54,5 +73,14 @@ function onScanSuccess(decodedText, decodedResult) {
         qrResult.style.display = "none";
         btnAbrirQR.style.display = "inline-block";
       };
-    });
-}
+    };
+
+    try {
+      const cameras = await Html5Qrcode.getCameras();
+      const camera = cameras.find(c => c.label.toLowerCase().includes("back")) || cameras[0];
+      await html5QrCode.start(camera.id, config, onScanSuccess);
+    } catch (err) {
+      alert("No se pudo acceder a la cámara: " + err.message);
+    }
+  });
+});
