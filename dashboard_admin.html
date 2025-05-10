@@ -93,23 +93,11 @@
       <p>&copy; 2025 Universidad Tecnológica de Altamira — Administrador</p>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
   <!-- Scripts de Bootstrap y jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-  <script>
-    // Manejo de envío del formulario de registro
-    document.getElementById("admin-register-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      // Aquí podrías guardar la información en un arreglo o base de datos (simulado)
-      // Por ahora solo mostramos un mensaje de éxito
-      alert("Alumno agregado Correctamente");
-      // Opcional: Reiniciar el formulario y la vista previa
-      e.target.reset();
-      document.getElementById("photo-preview").style.display = "none";
-    });
-  </script>
 
   <script>
     // Registrar alumno
