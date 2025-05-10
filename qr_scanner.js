@@ -27,7 +27,7 @@ function onScanSuccess(decodedText, decodedResult) {
       // Detener cámara *después* de haber resuelto todo lo anterior
       try {
         await html5QrCode.stop();
-        readerContainer.innerHTML = "";
+        readerContainer.style.display = "none";
       } catch (stopError) {
         console.warn("Error al detener la cámara o procesar QR:", stopError);
         alert("Ocurrió un error al procesar el QR.");
