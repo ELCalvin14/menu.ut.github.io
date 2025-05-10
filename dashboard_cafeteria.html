@@ -11,6 +11,7 @@
   <script src="auth.js" defer></script>
   <!-- Nuestro script para simular el escaneo y editar alimentos -->
   <script src="qr_scanner.js" defer></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.7/html5-qrcode.min.js"></script>
 </head>
 <body class="cafe-body">
   <!-- HEADER -->
@@ -111,13 +112,9 @@ Jugo Natural - $20</textarea>
           <div class="panel panel-default">
             <div class="panel-heading"><strong>Escanear QR de Beca</strong></div>
             <div class="panel-body text-center">
-              <button id="simulate-scan" class="btn btn-info">Abrir Cámara y Escanear</button>
-              <!-- Video para la cámara -->
-              <video id="video" width="320" height="240" autoplay style="display:none; margin:10px auto; border: 2px solid #333;"></video>
-              <!-- Resultado del escaneo -->
-              <div id="qr-result" class="well" style="display:none; margin-top:20px;">
-                <!-- Se mostrará la credencial del alumno -->
-              </div>
+              <button id="btn-abrir-qr" class="btn btn-info">📷 Abrir Cámara y Escanear</button>
+              <div id="reader" style="width: 300px; margin: 20px auto; display: none;"></div>
+              <div id="qr-result" class="well" style="display:none; margin-top:20px;"></div>
             </div>
           </div>
         </div>
