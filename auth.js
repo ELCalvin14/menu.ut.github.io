@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const supabaseUrl = 'https://oazglvoajuusprtfhqpy.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hemdsdm9hanV1c3BydGZocXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4NDI3NzAsImV4cCI6MjA2MjQxODc3MH0.Qag6C8LMf5nRMg4JBvvHQ2mf6eW0wc1wKi78Euwq2vA';
-  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+  windows.supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
   const loginForm = document.getElementById("login-form");
 
   if (loginForm) {
