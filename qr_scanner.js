@@ -25,9 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         html5QrCode.stop().then(() => {
-          readerContainer.innerHTML = ""; // Limpiar solo después de detener correctamente
+          setTimeout(() => {
+            const element = document.getElementById("reader");
+            if (element) element.innerHTML = "";
+          }, 300); // Espera unos ms a que se desmonte internamente
         }).catch(err => {
-          console.warn("Error al detener cámara:", err);
+          console.error("Error al detener la cámara o procesar QR:", err);
+          alert("Ocurrió un error al procesar el QR.");
         });        
 
         qrResult.innerHTML = "<p class='text-info'>⏳ Buscando alumno...</p>";
