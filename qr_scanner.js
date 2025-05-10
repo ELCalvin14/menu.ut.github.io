@@ -63,11 +63,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const cameras = await Html5Qrcode.getCameras();
-      const cam = cameras.length > 1 ? cameras[1] : cameras[0];
-      await html5QrCode.start(cam.id, config, onScanSuccess);
+      await html5QrCode.start(
+        { facingMode: { exact: "environment" } },
+        config,
+        onScanSuccess
+      );      
     } catch (err) {
       alert("No se pudo acceder a la cámara: " + err.message);
+      console.warn("Fallo cámara trasera, usando la predeterminada:", err.message);
+      await html5QrCode.start(
+        { facingMode: "user" },
+        config,
+        onScanSuccess
+      );
     }
   });
 });
