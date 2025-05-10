@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const cameras = await Html5Qrcode.getCameras();
-      const cam = cameras.find(c => c.label.toLowerCase().includes("front")) || cameras[0];
+      const cam = cameras.find(c => c.label.toLowerCase().includes("back")) || cameras[0];
       await html5QrCode.start(cam.id, config, onScanSuccess);
     } catch (err) {
       alert("No se pudo acceder a la cámara: " + err.message);
