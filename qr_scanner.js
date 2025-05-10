@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <button id="btn-canjear" class="btn btn-success">✅ Canjear Beca</button>
             <button id="btn-no-canjear" class="btn btn-danger">❌ No Canjear</button>
           `;
+          qrResult.innerHTML = "<p class='text-info'>⏳ Buscando alumno...</p>";
           qrResult.style.display = "block";
 
           document.getElementById("btn-canjear").onclick = () => {
