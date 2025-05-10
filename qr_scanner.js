@@ -21,6 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
     const onScanSuccess = async (decodedText) => {
+      try {
+        await html5QrCode.stop();       // Detén la cámara inmediatamente
+        html5QrCode.clear();            // Limpia el lector
+        readerContainer.style.display = "none";
+      } catch (e) {
+        console.warn("Error al detener la cámara:", e.message);
+      }
       console.log("QR Detectado:", decodedText);
 
       const matricula = decodedText.split(":")[1]?.trim();
@@ -46,18 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      try {
-        await html5QrCode.stop();
-        html5QrCode.clear();
-        readerContainer.style.display = "none";
-      } catch (stopError) {
-        console.warn("Error al detener la cámara:", stopError);
-        alert("Ocurrió un error al procesar el QR.");
-      }
-
       qrResult.innerHTML = `
         <h3>Credencial del Alumno</h3>
-        <img src="${data.foto_url}" alt="Foto del Alumno" class="img-responsive center-block" style="max-width:300px;">
+        <img src="${data.foto_url}" alt="Foto del Alumno" class="img-responsive center-block" style="max-width:900px;">
         <p><strong>Nombre:</strong> ${data.nombre}</p>
         <p><strong>Matrícula:</strong> ${data.matricula}</p>
         <p><strong>Grado:</strong> ${data.grado}</p>
@@ -79,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const cameras = await Html5Qrcode.getCameras();
-      const camera = cameras.find(c => c.label.toLowerCase().includes("back")) || cameras[0];
+      const camera = cameras.find(c => c.label.toLowerCase().includes("back")) || cameras[1] || cameras[0];
       await html5QrCode.start(camera.id, config, onScanSuccess);
     } catch (err) {
       alert("No se pudo acceder a la cámara: " + err.message);
