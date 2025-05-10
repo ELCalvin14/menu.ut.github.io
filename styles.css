@@ -267,10 +267,9 @@
     text-align: center;
   }
 
-  /* Capa borrosa (sin cubrir header ni ayuda) */
   .overlay-proximamente {
     position: fixed;
-    top: 60px; /* no cubre el navbar */
+    top: 60px; /* valor por defecto */
     left: 0;
     right: 0;
     bottom: 0;
@@ -280,6 +279,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* En pantallas pequeñas (móviles), aumenta el top */
+  @media (max-width: 768px) {
+    .overlay-proximamente {
+      top: 115px;
+    }
   }
 
   /* Cuadro de mensaje centrado */
