@@ -24,8 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        await html5QrCode.stop(); // Detiene correctamente la cámara
-        readerContainer.innerHTML = ""; // Limpia después del stop
+        html5QrCode.stop().then(() => {
+          readerContainer.innerHTML = ""; // Limpiar solo después de detener correctamente
+        }).catch(err => {
+          console.warn("Error al detener cámara:", err);
+        });        
 
         qrResult.innerHTML = "<p class='text-info'>⏳ Buscando alumno...</p>";
         qrResult.style.display = "block";
