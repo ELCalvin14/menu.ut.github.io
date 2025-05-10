@@ -7,6 +7,7 @@
   <!-- Bootstrap 3 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="auth.js" defer></script>
   <script src="jquery.min.js"></script>
 </head>
@@ -52,16 +53,34 @@
               <input type="date" id="adm-vigencia" class="form-control" required>
             </div>
             <div class="form-group">
-              <label for="adm-photo">Foto de Credencial</label>
-              <input type="file" id="adm-photo" class="form-control" accept="image/*" required>
+              <label for="adm-photo-url">URL de la Foto de Credencial</label>
+              <input type="url" id="adm-photo-url" class="form-control" placeholder="https://...">
               <img id="photo-preview" src="" alt="Vista previa" style="max-width:200px; margin-top:10px; display:none;">
-            </div>
+            </div>                     
             <button type="submit" class="btn btn-primary">Registrar</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="container" style="margin-top:30px;">
+    <h3 class="text-center">Alumnos Registrados</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Matrícula</th>
+          <th>Nombre</th>
+          <th>Grado</th>
+          <th>Vigencia</th>
+          <th>Credencial</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-alumnos">
+        <!-- Se llena con JS -->
+      </tbody>
+    </table>
+  </div>  
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -75,20 +94,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <script>
-    // Manejo de vista previa de imagen al seleccionar la foto de la credencial
-    document.getElementById("adm-photo").addEventListener("change", function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const preview = document.getElementById("photo-preview");
-          preview.src = e.target.result;
-          preview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
     // Manejo de envío del formulario de registro
     document.getElementById("admin-register-form").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -99,6 +104,80 @@
       e.target.reset();
       document.getElementById("photo-preview").style.display = "none";
     });
+  </script>
+
+  <script>
+    // CONFIGURA TU SUPABASE
+    const supabaseUrl = 'https://oazglvoajuusprtfhqpy.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hemdsdm9hanV1c3BydGZocXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4NDI3NzAsImV4cCI6MjA2MjQxODc3MH0.Qag6C8LMf5nRMg4JBvvHQ2mf6eW0wc1wKi78Euwq2vA';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Registrar alumno
+    document.getElementById("admin-register-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const matricula = document.getElementById("adm-matricula").value.trim();
+      const nombre = document.getElementById("adm-nombre").value.trim();
+      const grado = document.getElementById("adm-grado").value.trim();
+      const vigencia = document.getElementById("adm-vigencia").value;
+      const fotoUrl = document.getElementById("adm-photo-url").value.trim();
+
+      // Validación: nombre debe tener al menos 3 palabras
+      const nombreValido = nombre.split(" ").filter(p => p.length > 0).length >= 3;
+
+      // Validación: URL básica
+      const urlValida = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(fotoUrl);
+
+      if (!nombreValido) {
+        alert("El nombre debe tener al menos tres palabras.");
+        return;
+      }
+
+      if (!urlValida) {
+        alert("La URL de la credencial no es válida.");
+        return;
+      }
+
+      const { error: insertError } = await supabase.from("alumnos").insert({
+        matricula,
+        nombre,
+        grado,
+        vigencia,
+        foto_url: fotoUrl
+      });
+
+      if (insertError) {
+        alert("Error al registrar: " + insertError.message);
+      } else {
+        alert("Alumno agregado Correctamente");
+        this.reset();
+        document.getElementById("photo-preview").style.display = "none";
+        cargarAlumnos(); // actualiza la tabla
+      }
+    });
+
+    // Mostrar alumnos registrados
+    async function cargarAlumnos() {
+      const { data, error } = await supabase.from("alumnos").select("*");
+      const tabla = document.getElementById("tabla-alumnos");
+      tabla.innerHTML = "";
+      if (data) {
+        data.forEach(alumno => {
+          const row = `
+            <tr>
+              <td>${alumno.matricula}</td>
+              <td>${alumno.nombre}</td>
+              <td>${alumno.grado}</td>
+              <td>${alumno.vigencia}</td>
+              <td><img src="${alumno.foto_url}" style="width:80px;"></td>
+            </tr>`;
+          tabla.innerHTML += row;
+        });
+      }
+    }
+
+    // Carga inicial
+    cargarAlumnos();
   </script>
 </body>
 </html>
