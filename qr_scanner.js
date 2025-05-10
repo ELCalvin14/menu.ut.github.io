@@ -64,10 +64,47 @@ document.addEventListener("DOMContentLoaded", () => {
         <button id="btn-no-canjear" class="btn btn-danger">❌ No Canjear</button>
       `;
 
-      document.getElementById("btn-canjear").onclick = () => {
-        alert("✅ Beca canjeada exitosamente a las " + new Date().toLocaleString());
+      document.getElementById("btn-canjear").onclick = async () => {
+        const fechaHoy = new Date();
+        const fecha = fechaHoy.toISOString().split("T")[0];
+        const hora = fechaHoy.toTimeString().split(" ")[0];
+      
+        // Paso 1: verificar si ya se canjeó hoy
+        const { data: registrosHoy, error: errorConsulta } = await supabase
+          .from("becas_canjeadas")
+          .select("*")
+          .eq("matricula", data.matricula)
+          .eq("fecha", fecha);
+      
+        if (errorConsulta) {
+          alert("❌ Error al verificar el canje: " + errorConsulta.message);
+          return;
+        }
+      
+        if (registrosHoy.length > 0) {
+          alert("⚠️ Esta beca ya fue canjeada hoy (" + fecha + "). No se puede volver a canjear.");
+          return;
+        }
+      
+        // Paso 2: si no ha sido canjeada, insertamos
+        const { error: insertError } = await supabase.from("becas_canjeadas").insert({
+          matricula: data.matricula,
+          nombre: data.nombre,
+          grado: data.grado,
+          fecha: fecha,
+          hora: hora,
+          foto_url: data.foto_url
+        });
+      
+        if (insertError) {
+          alert("❌ Error al registrar el canje: " + insertError.message);
+          console.error(insertError);
+          return;
+        }
+      
+        alert("✅ Beca canjeada exitosamente el " + fecha + " a las " + hora);
       };
-
+      
       document.getElementById("btn-no-canjear").onclick = () => {
         qrResult.innerHTML = "";
         qrResult.style.display = "none";
