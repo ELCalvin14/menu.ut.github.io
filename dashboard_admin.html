@@ -8,13 +8,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const supabaseUrl = 'https://oazglvoajuusprtfhqpy.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hemdsdm9hanV1c3BydGZocXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4NDI3NzAsImV4cCI6MjA2MjQxODc3MH0.Qag6C8LMf5nRMg4JBvvHQ2mf6eW0wc1wKi78Euwq2vA';
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
   </script>
-  <script src="auth.js"></script>
 </head>
 <body class="admin-body">
   <!-- HEADER -->
@@ -125,12 +124,23 @@
         return;
       }
 
+      // Extraer primer nombre
+      const primerNombre = nombre.split(" ")[0];
+
+      // Extraer número de grado
+      const gradoNum = grado.match(/\d+/)?.[0] || "0";  // Extrae el número del grado (ej. "4" de "4°A")
+
+      // Construir contraseña automática
+      const contrasenaGenerada = `${matricula}${primerNombre}${gradoNum}`;
+      console.log("Contraseña generada:", contrasenaGenerada);
+
       const { error: insertError } = await supabase.from("alumnos").insert({
         matricula,
         nombre,
         grado,
         vigencia,
-        foto_url: fotoUrl
+        foto_url: fotoUrl,
+        contrasena: contrasenaGenerada
       });
 
       if (insertError) {
