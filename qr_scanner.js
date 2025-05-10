@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("📦 qr_scanner.js cargado correctamente");
   const btnAbrirQR = document.getElementById("btn-abrir-qr");
   const qrResult = document.getElementById("qr-result");
   const readerContainer = document.getElementById("reader");
